@@ -10,7 +10,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { MaterialModule } from './material/material.module';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
+import { metaReducers, reducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
@@ -33,8 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
       metaReducers,
       runtimeChecks: {
         strictStateImmutability: true,
-        strictActionImmutability: true
-      }
+        strictActionImmutability: true,
+      },
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
