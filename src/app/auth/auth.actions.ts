@@ -1,4 +1,9 @@
 import { createAction, props } from '@ngrx/store';
 import { User } from './user';
 
-export const login = createAction('[LOGIN PAGE] User Login', props<{ user: User }>());
+const LOGIN = '[LOGIN PAGE] User Login';
+const LOGOUT = '[NAV COMPONENT] User Logout';
+
+export const login = createAction(LOGIN, props<{ user: User }>());
+
+export const logout = createAction(LOGOUT);
