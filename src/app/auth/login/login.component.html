@@ -1,4 +1,36 @@
+// TODO: Validate form fields
 <mat-card>
   <mat-card-title>Login</mat-card-title>
-
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <mat-card-content ngModelGroup="loginData">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          name="email"
+          ngModel
+          placeholder="Email"
+          required
+          type="text">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          name="password"
+          ngModel
+          placeholder="Password"
+          required
+          type="text">
+      </mat-form-field>
+      <mat-card-actions>
+        <button
+          [disabled]="f.invalid"
+          color="primary"
+          mat-raised-button
+          type="submit">Login
+        </button>
+      </mat-card-actions>
+    </mat-card-content>
+  </form>
 </mat-card>
