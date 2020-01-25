@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { EmailValidator, NgForm } from '@angular/forms';
 import { tap } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
+import { noop } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,6 @@ export class LoginComponent {
   login(): void {
     this.authService.login(this.user).pipe(tap(user => {
       console.log(user);
-    })).subscribe();
+    })).subscribe(noop, () => alert('Login Failed'));
   }
 }
