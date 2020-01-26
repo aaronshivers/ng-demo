@@ -24,7 +24,7 @@ export class NavComponent {
     private store: Store<AuthState>,
   ) {}
 
-  logout() {
+  onLogout() {
     this.store.dispatch(logout());
   }
 }
