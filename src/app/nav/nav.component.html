@@ -8,9 +8,15 @@
     fixedInViewport>
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="/login">Login</a>
-      <a (click)="onLogout()" mat-list-item>Logout</a>
-      <a mat-list-item routerLink="/items">Items</a>
+      <a
+        *ngIf="isLoggedOut$ | async"
+        mat-list-item
+        routerLink="/login">Login</a>
+      <a
+        (click)="onLogout()"
+        *ngIf="isLoggedIn$ | async"
+        mat-list-item>Logout</a>
+      <a *ngIf="isLoggedIn$ | async" mat-list-item routerLink="/items">Items</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
