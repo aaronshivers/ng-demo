@@ -14,4 +14,8 @@ export class ItemService {
   postItem(item: Item): Observable<{}> {
     return this.httpClient.post(this.url, item);
   }
+
+  getItems(): Observable<{}> {
+    return this.httpClient.get(this.url);
+  }
 }

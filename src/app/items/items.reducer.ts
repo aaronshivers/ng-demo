@@ -3,21 +3,26 @@ import { createReducer, on } from '@ngrx/store';
 import * as itemsActions from './items.actions';
 
 export interface ItemsState {
-  item: Item;
+  items: Item;
 }
 
 const initialItemsState: ItemsState = {
-  item: undefined,
+  items: undefined,
 };
 
 export const itemsReducer = createReducer(
   initialItemsState,
 
   on(
-    itemsActions.addItem, (state: ItemsState, action: { item: Item }) => {
-      return {
-        item: action.item,
-      };
+    itemsActions.addItem,
+    (state: ItemsState, action: { item: Item }): ItemsState => {
+      console.log(state, action.item);
+      return { ...state, items: action.item };
     },
   ),
+
+  // on(
+  //   itemsActions.getItems, ();
+  // )
 );
+
