@@ -6,6 +6,7 @@ import { select, Store } from '@ngrx/store';
 import { AuthState } from '../auth/auth.reducer';
 import { logout } from '../auth/auth.actions';
 import { isLoggedIn, isLoggedOut } from '../auth/auth.selectors';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -26,6 +27,7 @@ export class NavComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private store: Store<AuthState>,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -35,5 +37,6 @@ export class NavComponent implements OnInit {
 
   onLogout() {
     this.store.dispatch(logout());
+    this.router.navigateByUrl('/');
   }
 }
