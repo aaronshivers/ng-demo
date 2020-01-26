@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ItemService } from './item.service';
 import { Item } from './item';
+import { Store } from '@ngrx/store';
+import { ItemsState } from './items.reducer';
+import { addItem } from './items.actions';
 
 @Component({
   selector: 'app-tasks',
@@ -14,7 +17,10 @@ export class ItemsComponent implements OnInit {
     body: '',
   };
 
-  constructor(private itemService: ItemService) { }
+  constructor(
+    private itemService: ItemService,
+    private store: Store<ItemsState>,
+  ) { }
 
   ngOnInit() {
   }
@@ -23,9 +29,7 @@ export class ItemsComponent implements OnInit {
     this.item.body = this.itemForm.value.itemData.body;
 
     this.itemService.postItem(this.item).subscribe((item: Item) => {
-      console.log(item);
+      this.store.dispatch(addItem({ item }));
     });
-
-    console.log(this.item);
   }
 }
