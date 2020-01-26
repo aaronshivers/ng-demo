@@ -1,0 +1,26 @@
+<!--TODO: Validate form fields-->
+<mat-card>
+  <mat-card-title>New Item</mat-card-title>
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <mat-card-content ngModelGroup="itemData">
+      <mat-form-field>
+        <mat-label>Item</mat-label>
+        <input
+          matInput
+          name="item"
+          ngModel
+          placeholder="Item"
+          required
+          type="text">
+      </mat-form-field>
+      <mat-card-actions>
+        <button
+          [disabled]="f.invalid"
+          color="primary"
+          mat-raised-button
+          type="submit">Add Item
+        </button>
+      </mat-card-actions>
+    </mat-card-content>
+  </form>
+</mat-card>

@@ -14,14 +14,14 @@ import { metaReducers, reducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
-import { TasksComponent } from './tasks/tasks.component';
+import { ItemsComponent } from './items/items.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     LoginComponent,
-    TasksComponent,
+    ItemsComponent,
   ],
   imports: [
     BrowserModule,
