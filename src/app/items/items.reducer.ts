@@ -3,11 +3,11 @@ import { createReducer, on } from '@ngrx/store';
 import * as itemsActions from './items.actions';
 
 export interface ItemsState {
-  items: Item;
+  items: Item[];
 }
 
 const initialItemsState: ItemsState = {
-  items: undefined,
+  items: [],
 };
 
 export const itemsReducer = createReducer(
@@ -17,7 +17,7 @@ export const itemsReducer = createReducer(
     itemsActions.addItem,
     (state: ItemsState, action: { item: Item }): ItemsState => {
       console.log(state, action.item);
-      return { ...state, items: action.item };
+      return { ...state, items: [ ...state.items, action.item ] };
     },
   ),
 
