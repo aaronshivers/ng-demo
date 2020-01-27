@@ -10,11 +10,13 @@ import { LoginComponent } from './auth/login/login.component';
 import { MaterialModule } from './material/material.module';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 import { metaReducers, reducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { ItemsComponent } from './items/items.component';
+import { ItemsEffects } from './items/items.effects';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { ItemsComponent } from './items/items.component';
     HttpClientModule,
     LayoutModule,
     MaterialModule,
+    EffectsModule.forRoot([ ItemsEffects ]),
     FormsModule,
     StoreModule.forRoot(reducers, {
       metaReducers,

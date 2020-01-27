@@ -4,8 +4,8 @@ import { ItemService } from './item.service';
 import { Item } from './item';
 import { Store } from '@ngrx/store';
 import { ItemsState } from './items.reducer';
-import { addItem } from './items.actions';
 import { Observable } from 'rxjs';
+import * as ItemActions from './items.actions';
 
 @Component({
   selector: 'app-tasks',
@@ -18,11 +18,12 @@ export class ItemsComponent implements OnInit {
     id: undefined,
     body: '',
   };
-  items$: string[] = [];
+  items$: Observable<Item[]> = this.store.select(state => state.items);
 
   constructor(
     private itemService: ItemService,
-    private store: Store<ItemsState>,
+    private store: Store<{ items: Item[] }>,
+    // private store: Store<ItemsState>,
   ) { }
 
   ngOnInit() {
@@ -33,16 +34,19 @@ export class ItemsComponent implements OnInit {
     this.item.body = this.itemForm.value.itemData.body;
 
     this.itemService.postItem(this.item).subscribe((item: Item) => {
-      this.store.dispatch(addItem({ item }));
+      this.store.dispatch(ItemActions.addItem({ item }));
     });
   }
 
   getItems(): void {
-    this.itemService.getItems().subscribe((items: Item) => {
-      // @ts-ignore
-      for (const item of items) {
-        this.items$.push(JSON.stringify(item));
-      }
-    });
+    this.store.dispatch(ItemActions.getItems());
   }
+  // getItems(): void {
+  //   this.itemService.getItems().subscribe((items: Item) => {
+  //     // @ts-ignore
+  //     for (const item of items) {
+  //       this.items$.push(JSON.stringify(item));
+  //     }
+  //   });
+  // }
 }
