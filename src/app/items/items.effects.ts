@@ -4,19 +4,21 @@ import * as ItemsActions from './items.actions';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { ItemService } from './item.service';
 import { EMPTY } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { log } from 'util';
+import { Store } from '@ngrx/store';
+import { ItemsState } from './items.reducer';
 
 @Injectable()
 export class ItemsEffects {
 
-  // @ts-ignore
   loadItems$ = createEffect(() => this.actions$.pipe(
     ofType(ItemsActions.GET_ITEMS),
     mergeMap(() => this.itemService.getItems().pipe(
       map(items => {
-        console.log(items);
-        return ({ type: ItemsActions.getItemsSuccess(), payload: items });
+        // tslint:disable-next-line:forin
+        for (const i in items) {
+          this.store.dispatch(ItemsActions.addItem(items[i]));
+        }
+        return ({ type: ItemsActions.GET_ITEMS_SUCCESS, payload: items });
       }),
       catchError(() => EMPTY),
     )),
@@ -25,8 +27,6 @@ export class ItemsEffects {
   constructor(
     private actions$: Actions,
     private itemService: ItemService,
-    private httpClient: HttpClient,
-  ) {
-    console.log(this.loadItems$);
-  }
+    private store: Store<ItemsState>
+  ) {}
 }

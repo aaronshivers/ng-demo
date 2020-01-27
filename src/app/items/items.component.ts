@@ -18,12 +18,11 @@ export class ItemsComponent implements OnInit {
     id: undefined,
     body: '',
   };
-  items$: Observable<Item[]> = this.store.select(state => state.items);
+  items$: Observable<Item[]>;
 
   constructor(
     private itemService: ItemService,
     private store: Store<{ items: Item[] }>,
-    // private store: Store<ItemsState>,
   ) { }
 
   ngOnInit() {
@@ -40,6 +39,8 @@ export class ItemsComponent implements OnInit {
 
   getItems(): void {
     this.store.dispatch(ItemActions.getItems());
+    this.items$ = this.store.select(state => state.items);
+    this.items$.subscribe(res => console.log(res));
   }
   // getItems(): void {
   //   this.itemService.getItems().subscribe((items: Item) => {

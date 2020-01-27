@@ -17,6 +17,7 @@ import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { ItemsComponent } from './items/items.component';
 import { ItemsEffects } from './items/items.effects';
+import { AppEffects } from './app.effects';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { ItemsEffects } from './items/items.effects';
     HttpClientModule,
     LayoutModule,
     MaterialModule,
-    EffectsModule.forRoot([ ItemsEffects ]),
+    EffectsModule.forRoot([ ItemsEffects, AppEffects ]),
     FormsModule,
     StoreModule.forRoot(reducers, {
       metaReducers,

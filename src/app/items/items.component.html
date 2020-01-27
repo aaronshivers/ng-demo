@@ -25,11 +25,11 @@
   </form>
 </mat-card>
 
-<!--<mat-card *ngIf="items$">-->
-<!--  <mat-card-title>Items</mat-card-title>-->
-<!--  <mat-card-content>-->
-<!--    <mat-list>-->
+<mat-card *ngIf="items$ | async">
+  <mat-card-title>Items</mat-card-title>
+  <mat-card-content>
+    <mat-list>
 <!--      <mat-list-item *ngFor="let item of items$ | async">{{ item.body }}</mat-list-item>-->
-<!--    </mat-list>-->
-<!--  </mat-card-content>-->
-<!--</mat-card>-->
+    </mat-list>
+  </mat-card-content>
+</mat-card>
