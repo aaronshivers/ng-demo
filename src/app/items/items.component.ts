@@ -3,9 +3,9 @@ import { NgForm } from '@angular/forms';
 import { ItemService } from './item.service';
 import { Item } from './item';
 import { Store } from '@ngrx/store';
-import { ItemsState } from './items.reducer';
 import { Observable } from 'rxjs';
 import * as ItemActions from './items.actions';
+import { ItemsState } from './items.reducer';
 
 @Component({
   selector: 'app-tasks',
@@ -23,7 +23,8 @@ export class ItemsComponent implements OnInit {
   constructor(
     private itemService: ItemService,
     private store: Store<{ items: Item[] }>,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.getItems();
@@ -39,15 +40,9 @@ export class ItemsComponent implements OnInit {
 
   getItems(): void {
     this.store.dispatch(ItemActions.getItems());
-    this.items$ = this.store.select(state => state.items);
-    this.items$.subscribe(res => console.log(res));
+    this.items$ = this.store.select((state: { items: Item[] }): Item[] => {
+      // @ts-ignore
+      return state.items.items;
+    });
   }
-  // getItems(): void {
-  //   this.itemService.getItems().subscribe((items: Item) => {
-  //     // @ts-ignore
-  //     for (const item of items) {
-  //       this.items$.push(JSON.stringify(item));
-  //     }
-  //   });
-  // }
 }

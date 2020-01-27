@@ -14,11 +14,7 @@ export class ItemsEffects {
     ofType(ItemsActions.GET_ITEMS),
     mergeMap(() => this.itemService.getItems().pipe(
       map(items => {
-        // tslint:disable-next-line:forin
-        for (const i in items) {
-          this.store.dispatch(ItemsActions.addItem(items[i]));
-        }
-        return ({ type: ItemsActions.GET_ITEMS_SUCCESS, payload: items });
+        return ({ type: ItemsActions.SET_ITEMS, items });
       }),
       catchError(() => EMPTY),
     )),

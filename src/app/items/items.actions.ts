@@ -11,4 +11,4 @@ export const SET_ITEMS = '[ITEMS] Set Items';
 export const addItem = createAction(ADD_ITEM, props<{ item: Item }>());
 export const getItems = createAction(GET_ITEMS);
 export const getItemsSuccess = createAction(GET_ITEMS_SUCCESS);
-export const setItems = createAction(SET_ITEMS);
+export const setItems = createAction(SET_ITEMS, props<{ items: Item[] }>());

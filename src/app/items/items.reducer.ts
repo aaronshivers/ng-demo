@@ -19,5 +19,12 @@ export const itemsReducer = createReducer(
       return { ...state, items: [ ...state.items, action.item ] };
     },
   ),
+
+  on(
+    itemsActions.setItems,
+    (state: ItemsState, action: { items: Item[] }): ItemsState => {
+      return { ...state, items: action.items };
+    },
+  ),
 );
 
